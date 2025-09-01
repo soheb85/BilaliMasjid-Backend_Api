@@ -8,8 +8,7 @@ import com.example.bilalimasjid.repository.PrayerTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class GetAllTimePrayer {
@@ -71,5 +70,17 @@ public class GetAllTimePrayer {
         }
 
         return allTimePrayerRequest;
+    }
+
+    public Map<String, String> getNotificationPrayer() {
+        List<PrayerTime> prayers = prayerTimeRepository.findAll();
+        Map<String, String> prayerMap = new HashMap<>();
+
+        for (PrayerTime p : prayers) {
+            String key = "notification_" + p.getPrayerName().toLowerCase(); // e.g., notification_fajr
+            prayerMap.put(key, p.getAzan());
+        }
+
+        return prayerMap;
     }
 }

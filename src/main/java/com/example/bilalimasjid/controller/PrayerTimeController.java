@@ -44,4 +44,9 @@ public class PrayerTimeController {
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/azan")
+    public ResponseEntity<Map<String,String>> getNotificationPrayer(){
+        return ResponseEntity.ok(getAllTimePrayer.getNotificationPrayer());
+    }
+
 }
